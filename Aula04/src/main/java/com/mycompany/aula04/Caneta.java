@@ -3,7 +3,7 @@ package com.mycompany.aula04;
 /**
  * @author Caleb Wacht
  */
-public class Caneta {
+public final class Caneta {
     public String modelo;
     private float ponta;
     private boolean tampada;
@@ -20,7 +20,7 @@ public class Caneta {
         return this.modelo;
     }
     
-    public void setModelo(String m){
+    public final void setModelo(String m){
         this.modelo = m;
     }
     
