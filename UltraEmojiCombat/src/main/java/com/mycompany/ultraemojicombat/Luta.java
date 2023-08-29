@@ -1,54 +1,99 @@
 package com.mycompany.ultraemojicombat;
 
+import java.util.Random;
+
 /**
  *
  * @author Caleb Wacht
  */
 public class Luta {
     
-    private String desafiado;
+    private Lutador desafiado;
     
-    private String desafiante;
+    private Lutador desafiante;
     
-    private double rounds;
+    private int rounds;
     
     private boolean aprovada;
     
-    public void marcarLuta(){
-    
+    public void marcarLuta(Lutador l1, Lutador l2){
+        if (l1.getCategoria().equals(l2.getCategoria()) 
+                && l1 != l2) {
+            
+            this.setAprovada(true);
+            this.desafiado = l1;
+            this.desafiante = l2;
+            
+        } else {
+            this.setAprovada(false);
+            this.desafiado = null;
+            this.desafiante = null;
+            
+        }
     }
-    
+
     public void lutar(){
-    
+        if(this.aprovada){
+            System.out.println("=== DESAFIADO ===");
+            this.desafiado.apresentar();
+            System.out.println("=== DESAFIANTE ===");
+            this.desafiante.apresentar();
+            
+            Random random = new Random();
+            int vencedor = random.nextInt(3);
+            
+            switch (vencedor) {
+                case 0: // Empate
+                    System.out.println("========================================");
+                    System.out.println("Empatou!");
+                    this.desafiado.empatarLuta();
+                    this.desafiante.empatarLuta();
+                    System.out.println("========================================");
+                    break;
+                
+                case 1: // Desafiado vence
+                    System.out.println("========================================");
+                    System.out.println(this.desafiado.getNome() +" Venceu!");
+                    this.desafiado.ganharLuta();
+                    this.desafiante.perderLuta();
+                    System.out.println("========================================");
+                    break;
+                
+                case 2: // Desafiante vence
+                    System.out.println("========================================");
+                    System.out.println(this.desafiante.getNome() + " Veneceu!");
+                    this.desafiante.ganharLuta();
+                    this.desafiado.perderLuta();
+                    System.out.println("========================================");
+                    break;
+            }
+            
+        } else {
+            System.out.println("A luta não pode acontecer!");
+        }
     }
 
-    public Luta(String desafiado, String desafiante, double rounds) {
-        this.desafiado = desafiado;
-        this.desafiante = desafiante;
-        this.rounds = rounds;
-    }
-
-    public String getDesafiado() {
+    public Lutador getDesafiado() {
         return desafiado;
     }
 
-    public void setDesafiado(String desafiado) {
+    public void setDesafiado(Lutador desafiado) {
         this.desafiado = desafiado;
     }
 
-    public String getDesafiante() {
+    public Lutador getDesafiante() {
         return desafiante;
     }
 
-    public void setDesafiante(String desafiante) {
+    public void setDesafiante(Lutador desafiante) {
         this.desafiante = desafiante;
     }
 
-    public double getRounds() {
+    public int getRounds() {
         return rounds;
     }
 
-    public void setRounds(double rounds) {
+    public void setRounds(int rounds) {
         this.rounds = rounds;
     }
 
